@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package search;
+
+option go_package = "./proto;search";
+option csharp_namespace = "CC.gRPC.Search";
+
+/*
+A description of the service
+
+USAGE:
+...
+*/
+
+service Search {
+  rpc Search(SearchRequest) returns (SearchResponse) {}
+}
+
+// Perhaps some notes about the SearchRequest model
+message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
+
+// Perhaps some notes about the SearchResponse model
+message SearchResponse {
+  repeated Result results = 1;
+}
+
+message Result {
+  string url = 1;
+  string title = 2;
+  repeated string snippets = 3;
+}

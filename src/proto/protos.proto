@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package = "./proto;protos";
+option csharp_namespace = "ProtoService.Web.Proto";
+
+service Protos {
+  rpc List(ListRequest) returns (ListResponse) {
+		option (google.api.http) = {
+      get: "/"
+    };
+	}
+  rpc Get(GetRequest) returns (GetResponse) {
+		option (google.api.http) = {
+      get: "/{name}"
+    };
+	}
+  rpc Save(SaveProtosRequest) returns (SaveProtosResponse) {
+		option (google.api.http) = {
+      post: "/{name}",
+			body: "protoFile"
+    };
+	}
+  rpc Delete(DeleteRequest) returns (DeleteResponse) {
+		option (google.api.http) = {
+      delete: "/{name}"
+    };
+	}
+}
+
+message ListRequest {}
+
+message ListResponse {
+  repeated ListItem items = 1;
+}
+
+message ListItem {
+  string name = 1;
+}
+
+message GetRequest {
+  string name = 1;
+}
+
+message GetResponse {
+  string name = 1;
+  string protoFile = 2;
+}
+
+message SaveRequest {
+  string name = 1;
+  string protoFile = 2;
+  bool overwrite = 3;
+}
+
+message SaveResponse {
+  string name = 1;
+  bool success = 2;
+  string message = 3;
+}
+
+message DeleteRequest {
+  string name = 1;
+}
+
+message DeleteResponse {
+  string name = 1;
+  bool success = 2;
+  string message = 3;
+}

@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package posts;
+
+option go_package = "./proto;posts2";
+option csharp_namespace = "CC.Proto.Posts2";
+
+service Posts2   {
+	rpc Save(SaveRequest) returns (SaveResponse) {}
+	rpc Query(QueryRequest) returns (QueryResponse) {}
+	rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+	rpc Update(UpdateRequest) returns (UpdateResponse) {}
+}
+
+message SaveRequest {
+	string id = 1;
+	string title = 2;
+	string slug = 3;
+	string content = 4;
+	int64 timestamp = 5;
+	repeated string tags = 6;
+}
+
+message SaveResponse {
+	string id;
+}
+
+message QueryRequest {
+	string searchTerm;
+}
+
+message Result {
+	string id;
+	string name;
+}
+
+message QueryResponse {
+	string searchTerm;
+	repeated Request results;
+}
+
+message UpdateRequest {
+	string id = 1;
+	string title = 2;
+	string slug = 3;
+	string content = 4;
+	int64 timestamp = 5;
+	repeated string tags = 6;
+}
+
+message UpdateResponse {
+	string id;
+}
+
+message DeleteRequest {
+	string id = 1;
+}
+
+message DeleteResponse {
+	string id;
+}
